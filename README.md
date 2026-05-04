@@ -156,7 +156,17 @@ A high-fidelity, fully-interactive recreation of the Battlefield 4 main menu int
 ![Version](https://img.shields.io/badge/version-3.0.0-0099d4?style=for-the-badge&labelColor=04070c)
 ![Screens](https://img.shields.io/badge/screens-7-1fca5c?style=for-the-badge&labelColor=04070c)
 
-**[🎮 Click here to play the demo →](https://htmlpreview.github.io/?https://github.com/ArisLiWind/World-online-function-building.-Basics/blob/main/index.html)**
+# Battlefield 4 - Interactive Game Demo
+
+为游戏UI设计师和开发者打造的**高保真交互式游戏菜单系统demo**，展示从登录到游戏内HUD的完整交互流程。本demo为想要学习现代游戏UI设计和交互实现的开发者提供即学即用的参考代码与最佳实践。
+
+## Play Demo
+
+🎮 **[Click Here to Play the Full Interactive Demo](https://arisliwind.github.io/World-online-function-building.-Basics/bf4-game.html)** - 直接在浏览器中体验完整的游戏流程（登录 → 菜单 → 服务器浏览 → 武器定制 → 游戏内）
+
+---
+
+Made with ❤️ for game developers & UI designers.*[🎮 Click here to play the demo →](https://htmlpreview.github.io/?https://github.com/ArisLiWind/World-online-function-building.-Basics/blob/main/index.html)**
 
 *A high-fidelity interactive prototype of the Battlefield 4 main menu UI*  
 
