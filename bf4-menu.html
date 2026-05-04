@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Battlefield 4 - Main Menu UI</title>
+      <style>
+          * {
+              margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+}
+
+        body {
+                      font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+}
+
+        .menu-container {
+                      width: 100%;
+            height: 100vh;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23111827;stop-opacity:1" /><stop offset="50%" style="stop-color:%231a202c;stop-opacity:1" /><stop offset="100%" style="stop-color:%23111827;stop-opacity:1" /></linearGradient></defs><rect width="1920" height="1080" fill="url(%23bg)"/></svg>') center/cover;
+            position: relative;
+            overflow: hidden;
+}
+
+        .menu-bg {
+                      position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 0;
+}
+
+        .menu-content {
+                      position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 60px 80px;
+            color: #ffffff;
+            }
+
+        .nav-bar {
+                      display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+}
+
+        .nav-item {
+                      padding: 10px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 13px;
+                          font-weight: bold;
+                          letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            position: relative;
+}
+
+        .nav-item:hover {
+                      color: #ffffff;
+                      }
+
+        .nav-item.active {
+            color: #ffffff;
+                        border-bottom-color: #ff9800;
+                          }
+
+        .greeting {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            }
+
+        .main-title {
+                      position: absolute;
+            left: 80px;
+            bottom: 150px;
+            font-size: 120px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            line-height: 1;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .main-title.bf4 {
+            font-size: 100px;
+            opacity: 0.9;
+        }
+
+                  .main-title.ui {
+                          font-size: 80px;
+            opacity: 0.8;
+                  }
+
+        .content-grid {
+                      display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            flex: 1;
+            margin-bottom: 30px;
+}
+
+        .content-card {
+                      background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+                          cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            height: 200px;
+}
+
+        .content-card:hover {
+            background: rgba(0, 0, 0, 0.6);
+            border-color: #ff9800;
+                          transform: translateY(-5px);
+        }
+
+        .content-card-image {
+                      width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a2a3a 0%, #2a3a4a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+}
+
+        .shortcuts {
+                      display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 12px;
+}
+
+        .shortcut-btn {
+                      width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+                        cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 18px;
+}
+
+        .shortcut-btn:hover {
+                      background: rgba(255, 255, 255, 0.2);
+            border-color: #ff9800;
+              }
+
+        .recently-played {
+                          margin-top: 30px;
+        }
+
+        .recently-played-title {
+                      font-size: 12px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+}
+
+        .recently-played-grid {
+                      display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+}
+
+        .game-thumbnail {
+                      width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #1a2a3a 0%, #2a3a4a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+}
+
+        .game-thumbnail:hover {
+                      border-color: #ff9800;
+                      transform: scale(1.05);
+}
+
+        .game-thumbnail-content {
+                      width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            padding: 10px;
+}
+
+        .footer {
+                      position: absolute;
+            bottom: 20px;
+            right: 80px;
+            display: flex;
+            gap: 20px;
+}
+
+        .footer-btn {
+                      padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+                        cursor: pointer;
+            text-transform: uppercase;
+            font-size: 11px;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+}
+
+        .footer-btn:hover {
+                      background: rgba(255, 255, 255, 0.2);
+            border-color: #ff9800;
+              }
+
+        .footer-btn.primary {
+            background: #ff9800;
+                        border-color: #ff9800;
+                                      color: #000000;
+            font-weight: bold;
+            }
+
+        .footer-btn.primary:hover {
+                      background: #ffb74d;
+                      }
+
+        @keyframes fadeIn {
+                      from {
+                opacity: 0;
+                transform: translateY(10px);
+        }
+            to {
+                              opacity: 1;
+                transform: translateY(0);
+        }
+}
+
+        .content-grid {
+                      animation: fadeIn 0.5s ease;
+}
+
+        @media (max-width: 1600px) {
+            .main-title {
+                          font-size: 80px;
+}
+}
+
+        @media (max-width: 1200px) {
+            .content-grid {
+                          grid-template-columns: repeat(2, 1fr);
+}
+            .recently-played-grid {
+                          grid-template-columns: repeat(3, 1fr);
+}
+}
+    </style>
+          </head>
+          <body>
+              <div class="menu-container">
+                  <div class="menu-bg"></div>
+                  <div class="menu-content">
+                      <div class="nav-bar">
+                          <div class="nav-item active" onclick="selectNav(this, 'home')">HOME</div>
+                          <div class="nav-item" onclick="selectNav(this, 'multiplayer')">MULTIPLAYER</div>
+                          <div class="nav-item" onclick="selectNav(this, 'campaign')">CAMPAIGN</div>
+                          <div class="nav-item" onclick="selectNav(this, 'soldier')">SOLDIER</div>
+                          <div class="nav-item" onclick="selectNav(this, 'store')">STORE</div>
+                          <div class="nav-item" onclick="selectNav(this, 'more')">MORE</div>
+                      </div>
+
+                      <div class="greeting">Good afternoon soldier.</div>
+
+            <div class="content-grid" id="contentGrid">
+                <div class="content-card">
+                    <div class="content-card-image">Featured: Campaign</div>
+                          </div>
+                          <div class="content-card">
+                              <div class="content-card-image">Multiplayer News</div>
+                          </div>
+                          <div class="content-card">
+                              <div class="content-card-image">Store Promotion</div>
+                          </div>
+                      </div>
+
+                      <div class="shortcuts">
+                          <span>SHORTCUTS</span>
+                          <div class="shortcut-btn">⊟</div>
+                          <div class="shortcut-btn">★</div>
+                          <div class="shortcut-btn">▶</div>
+                          <div class="shortcut-btn">▮▮</div>
+                          <div class="shortcut-btn">⚙</div>
+                      </div>
+
+                      <div class="recently-played">
+                          <div class="recently-played-title">RECENTLY PLAYED</div>
+                          <div class="recently-played-grid">
+                              <div class="game-thumbnail">
+                                  <div class="game-thumbnail-content">Recent Game 1</div>
+                              </div>
+                              <div class="game-thumbnail">
+                                  <div class="game-thumbnail-content">Recent Game 2</div>
+                              </div>
+                              <div class="game-thumbnail">
+                                  <div class="game-thumbnail-content">Recent Game 3</div>
+                              </div>
+                              <div class="game-thumbnail">
+                                  <div class="game-thumbnail-content">Recent Game 4</div>
+                              </div>
+                              <div class="game-thumbnail">
+                                  <div class="game-thumbnail-content">Recent Game 5</div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="main-title">
+                          <div class="bf4">BATTLEFIELD 4</div>
+                          <div class="ui">MAIN MENU UI</div>
+                      </div>
+
+                      <div class="footer">
+                          <button class="footer-btn">SETTINGS</button>
+                          <button class="footer-btn">HELP</button>
+                          <button class="footer-btn primary">PLAY NOW</button>
+                      </div>
+                  </div>
+              </div>
+
+              <script>
+                  function selectNav(element, section) {
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // Add active class to clicked element
+            element.classList.add('active');
+
+            // Update content based on section
+            updateContent(section);
+        }
+
+        function updateContent(section) {
+                      const contentGrid = document.getElementById('contentGrid');
+            let content = '';
+
+            switch(section) {
+case 'multiplayer':
+                    content = `
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Conquest Mode</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Deathmatch</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Squad Up</div>
+                                              </div>
+                                          `;
+                    break;
+case 'campaign':
+                    content = `
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Campaign Story</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">War Stories</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Missions</div>
+                                              </div>
+                                          `;
+                    break;
+case 'soldier':
+                    content = `
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Loadout</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Assignments</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Stats</div>
+                                              </div>
+                                          `;
+                    break;
+case 'store':
+                    content = `
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Battle Packs</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Premium Pass</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Special Offers</div>
+                                              </div>
+                                          `;
+                    break;
+case 'more':
+                    content = `
+                        <div class="content-card">
+                                                  <div class="content-card-image">Community</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Forums</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Support</div>
+                                              </div>
+                                          `;
+                    break;
+default:
+                    content = `
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Featured: Campaign</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Multiplayer News</div>
+                                              </div>
+                                              <div class="content-card">
+                                                  <div class="content-card-image">Store Promotion</div>
+                                              </div>
+                                          `;
+            }
+
+            contentGrid.innerHTML = content;
+        }
+
+        // Add hover effects to footer buttons
+        document.querySelectorAll('.footer-btn').forEach(btn => {
+                      btn.addEventListener('click', function() {
+                          if (this.classList.contains('primary')) {
+                              alert('Launching Battlefield 4 game...');
+}
+});
+});
+
+        // Add scroll smooth behavior
+        document.addEventListener('DOMContentLoaded', function() {
+                      console.log('Battlefield 4 Main Menu UI Loaded');
+        });
+    </script>
+      </body>
+      </html>
